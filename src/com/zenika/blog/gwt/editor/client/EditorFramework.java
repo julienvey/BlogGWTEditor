@@ -63,18 +63,22 @@ public class EditorFramework implements EntryPoint {
     }
 
     protected void saveData() {
-        personService.setPerson(editorDriver.flush(), new AsyncCallback<Void>() {
+        if (editorDriver.isDirty()) {
+            personService.setPerson(editorDriver.flush(), new AsyncCallback<Void>() {
 
-            @Override
-            public void onFailure(final Throwable caught) {
-                Window.alert("Call failed");
-            }
+                @Override
+                public void onFailure(final Throwable caught) {
+                    Window.alert("Call failed");
+                }
 
-            @Override
-            public void onSuccess(final Void result) {
-                Window.alert("Data saved");
-            }
-        });
+                @Override
+                public void onSuccess(final Void result) {
+                    Window.alert("Data saved");
+                }
+            });
+        } else {
+            Window.alert("Data has not changed");
+        }
 
     }
 
