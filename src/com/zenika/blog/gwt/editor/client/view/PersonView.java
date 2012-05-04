@@ -1,11 +1,12 @@
 package com.zenika.blog.gwt.editor.client.view;
 
+import com.google.gwt.editor.client.Editor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.zenika.blog.gwt.editor.client.widget.TextItem;
 import com.zenika.blog.gwt.editor.shared.Person;
 
-public class PersonView extends Composite {
+public class PersonView extends Composite implements Editor<Person> {
 
     private VerticalPanel form = new VerticalPanel();
 
@@ -28,22 +29,4 @@ public class PersonView extends Composite {
         form.add(address);
     }
 
-    public void setData(final Person result) {
-        firstName.setValue(result.getFirstName());
-        lastName.setValue(result.getLastName());
-        phoneNumber.setValue(result.getPhoneNumber());
-        company.setValue(result.getCompany());
-        address.setData(result.getAddress());
-    }
-
-    public Person getData() {
-        Person person = new Person();
-        person.setAddress(address.getData());
-        person.setFirstName(firstName.getValue());
-        person.setLastName(lastName.getValue());
-        person.setPhoneNumber(phoneNumber.getValue());
-        person.setCompany(company.getValue());
-        return person;
-
-    }
 }

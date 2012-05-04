@@ -1,12 +1,13 @@
 package com.zenika.blog.gwt.editor.client.view;
 
+import com.google.gwt.editor.client.Editor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.zenika.blog.gwt.editor.client.widget.ListItem;
 import com.zenika.blog.gwt.editor.client.widget.TextItem;
 import com.zenika.blog.gwt.editor.shared.Address;
 
-public class AddressView extends Composite {
+public class AddressView extends Composite implements Editor<Address> {
 
     private VerticalPanel mainPanel = new VerticalPanel();
 
@@ -27,19 +28,4 @@ public class AddressView extends Composite {
 
     }
 
-    public void setData(final Address address) {
-        street.setValue(address.getStreet());
-        zipCode.setValue(address.getZipCode());
-        city.setValue(address.getCity());
-        country.setValue(address.getCountry());
-    }
-
-    public Address getData() {
-        Address address = new Address();
-        address.setCity(city.getValue());
-        address.setCountry(country.getValue());
-        address.setStreet(street.getValue());
-        address.setZipCode(zipCode.getValue());
-        return address;
-    }
 }

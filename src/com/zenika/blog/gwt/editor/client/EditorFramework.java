@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -20,6 +21,11 @@ public class EditorFramework implements EntryPoint {
     private PersonView personView = new PersonView();
 
     private PersonServiceAsync personService = GWT.create(PersonService.class);
+
+    interface EditorDriver extends SimpleBeanEditorDriver<Person, PersonView> {
+    }
+
+    EditorDriver editorDriver = GWT.create(EditorDriver.class);
 
     @Override
     public void onModuleLoad() {
@@ -43,7 +49,8 @@ public class EditorFramework implements EntryPoint {
 
                     @Override
                     public void onSuccess(final Person result) {
-                        setData(result);
+                        editorDriver.initialize(personView);
+                        editorDriver.edit(result);
                     }
 
                     @Override
@@ -56,7 +63,7 @@ public class EditorFramework implements EntryPoint {
     }
 
     protected void saveData() {
-        personService.setPerson(personView.getData(), new AsyncCallback<Void>() {
+        personService.setPerson(editorDriver.flush(), new AsyncCallback<Void>() {
 
             @Override
             public void onFailure(final Throwable caught) {
@@ -71,7 +78,4 @@ public class EditorFramework implements EntryPoint {
 
     }
 
-    private void setData(final Person result) {
-        personView.setData(result);
-    }
 }
