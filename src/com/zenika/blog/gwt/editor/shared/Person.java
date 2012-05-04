@@ -15,6 +15,8 @@ public class Person implements Serializable {
 
     private String company;
 
+    private String hiddenField;
+
     public String getFirstName() {
         return firstName;
     }
@@ -53,5 +55,13 @@ public class Person implements Serializable {
 
     public void setCompany(final String company) {
         this.company = company;
+    }
+
+    public String getHiddenField() {
+        return hiddenField;
+    }
+
+    public void setHiddenField(final String hiddenField) {
+        this.hiddenField = hiddenField;
     }
 }

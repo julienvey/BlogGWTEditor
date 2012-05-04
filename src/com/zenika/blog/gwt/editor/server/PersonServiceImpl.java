@@ -23,6 +23,7 @@ public class PersonServiceImpl extends RemoteServiceServlet implements PersonSer
         person.setPhoneNumber("0102030405");
         person.setAddress(address);
         person.setCompany("Zenika");
+        person.setHiddenField("hiddenField");
     }
 
     @Override
@@ -32,6 +33,7 @@ public class PersonServiceImpl extends RemoteServiceServlet implements PersonSer
 
     @Override
     public void setPerson(final Person person) {
+        System.out.println("Hidden field value : " + person.getHiddenField());
         PersonServiceImpl.person = person;
 
     }
