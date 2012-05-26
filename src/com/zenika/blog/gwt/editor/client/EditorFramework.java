@@ -4,6 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.editor.client.EditorError;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -64,22 +65,30 @@ public class EditorFramework implements EntryPoint {
 
     protected void saveData() {
         if (editorDriver.isDirty()) {
-            personService.setPerson(editorDriver.flush(), new AsyncCallback<Void>() {
-
-                @Override
-                public void onFailure(final Throwable caught) {
-                    Window.alert("Call failed");
+            Person person = editorDriver.flush();
+            if (editorDriver.hasErrors()) {
+                StringBuilder errorBuilder = new StringBuilder();
+                for (EditorError error : editorDriver.getErrors()) {
+                    errorBuilder.append(error.getMessage() + "\n");
                 }
+                Window.alert(errorBuilder.toString());
+            } else {
+                personService.setPerson(person, new AsyncCallback<Void>() {
 
-                @Override
-                public void onSuccess(final Void result) {
-                    Window.alert("Data saved");
-                }
-            });
+                    @Override
+                    public void onFailure(final Throwable caught) {
+                        Window.alert("Call failed");
+                    }
+
+                    @Override
+                    public void onSuccess(final Void result) {
+                        Window.alert("Data saved");
+                    }
+                });
+            }
         } else {
             Window.alert("Data has not changed");
         }
 
     }
-
 }
