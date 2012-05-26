@@ -11,13 +11,13 @@ public class AddressView extends Composite implements Editor<Address> {
 
     private VerticalPanel mainPanel = new VerticalPanel();
 
-    private TextItem street = new TextItem("Street");
+    TextItem street = new TextItem("Street");
 
-    private TextItem zipCode = new TextItem("ZipCode");
+    TextItem zipCode = new TextItem("ZipCode");
 
-    private TextItem city = new TextItem("City");
+    TextItem city = new TextItem("City");
 
-    private ListItem country = new ListItem("Country", "France", "Spain", "England", "Germany");
+    ListItem country = new ListItem("Country", "France", "Spain", "England", "Germany");
 
     public AddressView() {
         initWidget(mainPanel);

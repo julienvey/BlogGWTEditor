@@ -10,15 +10,15 @@ public class PersonView extends Composite implements Editor<Person> {
 
     private VerticalPanel form = new VerticalPanel();
 
-    private TextItem firstName = new TextItem("First name");
+    TextItem firstName = new TextItem("First name");
 
-    private TextItem lastName = new TextItem("Last name");
+    TextItem lastName = new TextItem("Last name");
 
-    private TextItem phoneNumber = new TextItem("Phone number");
+    TextItem phoneNumber = new TextItem("Phone number");
 
-    private TextItem company = new TextItem("Company");
+    TextItem company = new TextItem("Company");
 
-    private AddressView address = new AddressView();
+    AddressView address = new AddressView();
 
     public PersonView() {
         initWidget(form);
